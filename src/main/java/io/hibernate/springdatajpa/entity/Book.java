@@ -29,11 +29,11 @@ public class Book {
         this.id = id;
     }
     
-    public Book(String title, String isbn, String author, String publisher) {
-        this.title = title;
-        this.isbn = isbn;
-        this.author = author;
-        this.publisher = publisher;
+    public Book(BookBuilder builder) {
+        this.title = builder.title;
+        this.isbn = builder.isbn;
+        this.author = builder.author;
+        this.publisher = builder.publisher;
     }
     
     public Book() {
@@ -88,10 +88,43 @@ public class Book {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("title", title)
-                .add("isbn", isbn)
-                .add("author", author)
-                .add("publisher", publisher)
+                .add("id", id == null ? "": id)
+                .add("title", title == null ? "" : title)
+                .add("isbn", isbn == null ? "" : isbn)
+                .add("author", author == null ? "" : author)
+                .add("publisher", publisher == null ? "" : publisher)
                 .toString();
+    }
+    
+    public static class BookBuilder {
+        private Long id;
+        private String title;
+        private String isbn;
+        private String author;
+        private String publisher;
+        
+        public BookBuilder title(String title){
+            this.title = title;
+            return this;
+        }
+        
+        public BookBuilder isbn(String isbn){
+            this.isbn = isbn;
+            return this;
+        }
+    
+        public BookBuilder author(String author){
+            this.author = author;
+            return this;
+        }
+    
+        public BookBuilder publisher(String publisher){
+            this.publisher = publisher;
+            return this;
+        }
+        
+        public Book build(){
+            return new Book(this);
+        }
     }
 }
