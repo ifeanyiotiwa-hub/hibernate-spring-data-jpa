@@ -2,6 +2,7 @@ package io.hibernate.springdatajpa.entity;
 
 
 import com.google.common.base.MoreObjects;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -69,6 +70,19 @@ public class Book {
     
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+    
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
     
     @Override
