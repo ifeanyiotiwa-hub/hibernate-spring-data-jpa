@@ -1,0 +1,59 @@
+package io.hibernate.springdatajpa.bootstrap;
+
+import io.hibernate.springdatajpa.entity.Book;
+import static io.hibernate.springdatajpa.entity.Book.BookBuilder;
+
+import io.hibernate.springdatajpa.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+
+@Component
+public class DataInitializer implements CommandLineRunner {
+    private final BookRepository bookRepository;
+    
+    public DataInitializer(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+    
+    @Override
+    public void run(String... args) throws Exception {
+        
+        Book bookDDD = new BookBuilder().title("Domain Driven Design 2014")
+                               .author("Rando Author")
+                               .isbn("1234")
+                               .publisher("Random Publisher")
+                               .build();
+        System.out.println("=========================================");
+        System.out.println(bookDDD);
+        System.out.println();
+        Book savedDDD = bookRepository.save(bookDDD);
+        System.out.println(">>>>");
+        System.out.println(savedDDD);
+        System.out.println("=========================================");
+        
+        Book secondBookDDD = new BookBuilder().title("Spring In Action")
+                                     .author("Oreilly")
+                                     .isbn("4562671")
+                                     .publisher("Second Random Publisher")
+                                     .build();
+        System.out.println("=========================================");
+        System.out.println(secondBookDDD);
+        
+        Book savedBookDDD = bookRepository.save(secondBookDDD);
+        System.out.println(">>>>>>");
+        System.out.println(savedBookDDD);
+        System.out.println("==========================================");
+    
+        System.out.println();
+        System.out.println();
+        
+        
+        bookRepository.findAll().forEach(x -> {
+            System.out.println(">>>>>>");
+            System.out.println(x);
+        });
+    
+    }
+}
