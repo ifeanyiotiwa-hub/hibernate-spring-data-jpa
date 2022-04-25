@@ -3,6 +3,8 @@
 #    show-sql: true
 
 spring:
+  profiles:
+    active: local
   jpa:
     properties:
       hibernate:
