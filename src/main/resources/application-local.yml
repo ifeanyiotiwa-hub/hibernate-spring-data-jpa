@@ -4,10 +4,15 @@ spring:
       mode: always
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/bookdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: bookadmin
-    password: bookadmin
+    username: bookuser
+    password: bookuser
   jpa:
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
+
+  liquibase:
+    user: bookadmin
+    password: bookadmin
+
 
