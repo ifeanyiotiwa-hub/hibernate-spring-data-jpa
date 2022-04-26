@@ -1,8 +1,10 @@
 package io.hibernate.springdatajpa.integrationtest;
 
 import io.hibernate.springdatajpa.entity.AuthorUuid;
+import io.hibernate.springdatajpa.entity.BookNatural;
 import io.hibernate.springdatajpa.entity.BookUuid;
 import io.hibernate.springdatajpa.repository.AuthorUuidRepository;
+import io.hibernate.springdatajpa.repository.BookNaturalRepository;
 import io.hibernate.springdatajpa.repository.BookRepository;
 import io.hibernate.springdatajpa.repository.BookUuidRepository;
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,22 @@ public class MySQLIntegrationTest {
     
     @Autowired
     AuthorUuidRepository authorUuidRepository;
+    @Autowired
+    BookNaturalRepository bookNaturalRepository;
+    
+    
+    @Test
+    public void testBookNatural() {
+        BookNatural bookNatural = new BookNatural();
+        bookNatural.setTitle("Book Natural");
+        BookNatural savedBookNatural = bookNaturalRepository.save(bookNatural);
+        assertThat(savedBookNatural).isNotNull();
+        assertThat(savedBookNatural.getTitle()).isEqualTo("Book Natural");
+        
+        BookNatural fetched = bookNaturalRepository.getById(savedBookNatural.getTitle());
+        assertThat(fetched).isNotNull();
+        assertThat(fetched).isEqualTo(savedBookNatural);
+    }
     
     @Test
     public void testMySQL() {
