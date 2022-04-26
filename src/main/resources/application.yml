@@ -21,7 +21,8 @@ spring:
   h2:
     console:
       enabled: true
-
+  flyway:
+    locations: classpath:db/migration/common, classpath:db/migration/{vendor}
 
 
 logging:

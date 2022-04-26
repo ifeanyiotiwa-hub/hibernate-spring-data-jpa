@@ -7,4 +7,4 @@ create table author (
                         primary key (id)
 ) engine=InnoDB;
 
-insert into author values (1, 'Ifeanyichukwu', 'otiwa');
+insert into author (id, first_name, last_name)values (1, 'Ifeanyichukwu', 'otiwa');
