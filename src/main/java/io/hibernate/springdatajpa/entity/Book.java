@@ -20,6 +20,7 @@ public class Book {
     private String isbn;
     private String author;
     private String publisher;
+    private Long authorId;
     
     public Long getId() {
         return id;
@@ -34,6 +35,7 @@ public class Book {
         this.isbn = builder.isbn;
         this.author = builder.author;
         this.publisher = builder.publisher;
+        this.authorId = builder.authorId;
     }
     
     public Book() {
@@ -88,7 +90,6 @@ public class Book {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("id", id == null ? "": id)
                 .add("title", title == null ? "" : title)
                 .add("isbn", isbn == null ? "" : isbn)
                 .add("author", author == null ? "" : author)
@@ -97,6 +98,7 @@ public class Book {
     }
     
     public static class BookBuilder {
+        public Long authorId;
         private Long id;
         private String title;
         private String isbn;
@@ -120,6 +122,11 @@ public class Book {
     
         public BookBuilder publisher(String publisher){
             this.publisher = publisher;
+            return this;
+        }
+        
+        public BookBuilder authorId(Long authorId){
+            this.authorId = authorId;
             return this;
         }
         

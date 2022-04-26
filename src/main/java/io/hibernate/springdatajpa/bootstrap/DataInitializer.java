@@ -27,6 +27,7 @@ public class DataInitializer implements CommandLineRunner {
                                .author("Rando Author")
                                .isbn("1234")
                                .publisher("Random Publisher")
+                               .authorId(null)
                                .build();
         System.out.println("=========================================");
         System.out.println(bookDDD);

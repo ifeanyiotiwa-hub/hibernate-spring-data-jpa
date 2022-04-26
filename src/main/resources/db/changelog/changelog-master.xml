@@ -7,4 +7,8 @@
 
     <include  file="db/changelog/baseline-changelog.xml"/>
     <include  file="db/changelog/init-hibernate.xml"/>
+    <include  file="db/changelog/add-author.xml"/>
+    <include  file="db/changelog/add-column-to-author.xml"/>
+    <include  file="db/changelog/insert-author.xml"/>
+<!--    <include  file="db/changelog/auto-increment-id-field.xml"/>-->
 </databaseChangeLog>
