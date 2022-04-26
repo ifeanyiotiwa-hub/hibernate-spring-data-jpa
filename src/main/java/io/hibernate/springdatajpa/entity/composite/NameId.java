@@ -1,8 +1,10 @@
 package io.hibernate.springdatajpa.entity.composite;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Embeddable
 public class NameId implements Serializable {
     private String firstName;
     private String lastName;

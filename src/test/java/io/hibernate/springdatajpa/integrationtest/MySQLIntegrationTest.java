@@ -4,6 +4,7 @@ import io.hibernate.springdatajpa.entity.AuthorUuid;
 import io.hibernate.springdatajpa.entity.BookNatural;
 import io.hibernate.springdatajpa.entity.BookUuid;
 import io.hibernate.springdatajpa.entity.composite.AuthorComposite;
+import io.hibernate.springdatajpa.entity.composite.AuthorEmbedded;
 import io.hibernate.springdatajpa.entity.composite.NameId;
 import io.hibernate.springdatajpa.repository.*;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,8 @@ public class MySQLIntegrationTest {
     
     @Autowired
     AuthorCompositeRepository authorCompositeRepository;
+    
+    @Autowired AuthorEmbeddedRepository authorEmbeddedRepository;
     
     
     @Test
@@ -85,5 +88,17 @@ public class MySQLIntegrationTest {
         
         AuthorComposite fetched = authorCompositeRepository.getById(nameId);
         assertThat(fetched).isNotNull();
+    }
+    
+    @Test
+    public void testAuthorEmbedded() {
+        NameId nameId = new NameId("Johnson", "T");
+        AuthorEmbedded authorEmbedded = new AuthorEmbedded(nameId);
+        AuthorEmbedded saved = authorEmbeddedRepository.save(authorEmbedded);
+        assertThat(saved).isNotNull();
+        
+        AuthorEmbedded fetched = authorEmbeddedRepository.getById(nameId);
+        assertThat(fetched).isNotNull();
+        assertThat(fetched).isEqualTo(saved);
     }
 }
