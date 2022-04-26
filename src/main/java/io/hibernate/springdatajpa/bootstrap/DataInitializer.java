@@ -4,8 +4,10 @@ import io.hibernate.springdatajpa.entity.AuthorUuid;
 import io.hibernate.springdatajpa.entity.Book;
 import static io.hibernate.springdatajpa.entity.Book.BookBuilder;
 
+import io.hibernate.springdatajpa.entity.BookUuid;
 import io.hibernate.springdatajpa.repository.AuthorUuidRepository;
 import io.hibernate.springdatajpa.repository.BookRepository;
+import io.hibernate.springdatajpa.repository.BookUuidRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -20,10 +22,13 @@ public class DataInitializer implements CommandLineRunner {
     
     private final BookRepository bookRepository;
     private final AuthorUuidRepository authorUuidRepository;
+    private final BookUuidRepository bookUuidRepository;
     
-    public DataInitializer(BookRepository bookRepository, AuthorUuidRepository authorUuidRepository) {
+    public DataInitializer(BookRepository bookRepository, AuthorUuidRepository authorUuidRepository,
+                           BookUuidRepository bookUuidRepository) {
         this.bookRepository = bookRepository;
         this.authorUuidRepository = authorUuidRepository;
+        this.bookUuidRepository = bookUuidRepository;
     }
     
     @Override
@@ -75,5 +80,10 @@ public class DataInitializer implements CommandLineRunner {
         AuthorUuid savedAuthorUuid = authorUuidRepository.save(authorUuid);
         LOG.info("Saved Author UUID: {}", savedAuthorUuid.getId());
     
+        BookUuid bookUuid = new BookUuid.BookBuilder()
+                                    .title("All it takes to be a Developer")
+                .build();
+        BookUuid savedBookUuid = bookUuidRepository.save(bookUuid);
+        System.err.println("Saved BookUUid id: " + savedBookUuid.getId());
     }
 }
