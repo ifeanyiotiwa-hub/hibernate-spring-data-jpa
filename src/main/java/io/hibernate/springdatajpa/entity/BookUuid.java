@@ -16,7 +16,7 @@ public class BookUuid {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Type(type = "")
-    @Column(name = "id", nullable = false, columnDefinition = "BINARY(16)", updatable = false)
+    @Column(name = "id", nullable = false, columnDefinition = "VARBINARY(16)", updatable = false)
     private UUID id;
     private String title;
     private String isbn;
