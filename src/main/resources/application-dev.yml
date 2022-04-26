@@ -1,0 +1,15 @@
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/bookdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: bookuser
+    password: bookuser
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    user: bookadmin
+    password: bookadmin

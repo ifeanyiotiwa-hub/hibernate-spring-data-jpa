@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 
-@Profile({"local", "default"})
+@Profile({"local", "default", "dev"})
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final BookRepository bookRepository;
@@ -27,7 +27,7 @@ public class DataInitializer implements CommandLineRunner {
                                .author("Rando Author")
                                .isbn("1234")
                                .publisher("Random Publisher")
-                               .authorId(null)
+                               .authorId(1L)
                                .build();
         System.out.println("=========================================");
         System.out.println(bookDDD);
@@ -41,6 +41,7 @@ public class DataInitializer implements CommandLineRunner {
                                      .author("Oreilly")
                                      .isbn("4562671")
                                      .publisher("Second Random Publisher")
+                                     .authorId(2L)
                                      .build();
         System.out.println("=========================================");
         System.out.println(secondBookDDD);

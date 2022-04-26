@@ -94,6 +94,7 @@ public class Book {
                 .add("isbn", isbn == null ? "" : isbn)
                 .add("author", author == null ? "" : author)
                 .add("publisher", publisher == null ? "" : publisher)
+                .add("author", authorId)
                 .toString();
     }
     
