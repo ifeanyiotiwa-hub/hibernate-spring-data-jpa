@@ -22,6 +22,8 @@ public class Book {
     private String publisher;
     private Long authorId;
     
+    private Long publisherId;
+    
     public Long getId() {
         return id;
     }
@@ -36,6 +38,7 @@ public class Book {
         this.author = builder.author;
         this.publisher = builder.publisher;
         this.authorId = builder.authorId;
+        this.publisherId = builder.publisherId;
     }
     
     public Book() {
@@ -100,6 +103,7 @@ public class Book {
     
     public static class BookBuilder {
         public Long authorId;
+        public Long publisherId;
         private Long id;
         private String title;
         private String isbn;
@@ -128,6 +132,11 @@ public class Book {
         
         public BookBuilder authorId(Long authorId){
             this.authorId = authorId;
+            return this;
+        }
+        
+        public BookBuilder publisherId(Long publisherId){
+            this.publisherId = publisherId;
             return this;
         }
         

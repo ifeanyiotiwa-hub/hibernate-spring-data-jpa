@@ -28,6 +28,7 @@ public class DataInitializer implements CommandLineRunner {
                                .isbn("1234")
                                .publisher("Random Publisher")
                                .authorId(1L)
+                               .publisherId(0L)
                                .build();
         System.out.println("=========================================");
         System.out.println(bookDDD);
@@ -42,6 +43,7 @@ public class DataInitializer implements CommandLineRunner {
                                      .isbn("4562671")
                                      .publisher("Second Random Publisher")
                                      .authorId(2L)
+                                     .publisherId(0L)
                                      .build();
         System.out.println("=========================================");
         System.out.println(secondBookDDD);
