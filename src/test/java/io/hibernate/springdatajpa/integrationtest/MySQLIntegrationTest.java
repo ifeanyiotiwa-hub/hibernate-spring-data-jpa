@@ -3,18 +3,15 @@ package io.hibernate.springdatajpa.integrationtest;
 import io.hibernate.springdatajpa.entity.AuthorUuid;
 import io.hibernate.springdatajpa.entity.BookNatural;
 import io.hibernate.springdatajpa.entity.BookUuid;
-import io.hibernate.springdatajpa.repository.AuthorUuidRepository;
-import io.hibernate.springdatajpa.repository.BookNaturalRepository;
-import io.hibernate.springdatajpa.repository.BookRepository;
-import io.hibernate.springdatajpa.repository.BookUuidRepository;
+import io.hibernate.springdatajpa.entity.composite.AuthorComposite;
+import io.hibernate.springdatajpa.entity.composite.NameId;
+import io.hibernate.springdatajpa.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -33,6 +30,9 @@ public class MySQLIntegrationTest {
     AuthorUuidRepository authorUuidRepository;
     @Autowired
     BookNaturalRepository bookNaturalRepository;
+    
+    @Autowired
+    AuthorCompositeRepository authorCompositeRepository;
     
     
     @Test
@@ -71,5 +71,19 @@ public class MySQLIntegrationTest {
     public void testSavedBookUuid() {
         BookUuid bookUuid = bookUuidRepository.save(new BookUuid.BookBuilder().title("Test title").build());
         assertThat(bookUuid.getId()).isNotNull();
+    }
+    
+    @Test
+    public void testAuthorComposite() {
+        NameId nameId = new NameId("Johnson", "T");
+        AuthorComposite authorComposite = new AuthorComposite();
+        authorComposite.setFirstName(nameId.getFirstName());
+        authorComposite.setLastName(nameId.getLastName());
+        authorComposite.setCountry("US");
+        AuthorComposite saved = authorCompositeRepository.save(authorComposite);
+        assertThat(saved).isNotNull();
+        
+        AuthorComposite fetched = authorCompositeRepository.getById(nameId);
+        assertThat(fetched).isNotNull();
     }
 }
