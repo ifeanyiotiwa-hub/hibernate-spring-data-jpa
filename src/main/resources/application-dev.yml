@@ -13,3 +13,4 @@ spring:
   flyway:
     user: bookadmin
     password: bookadmin
+    locations: classpath:db/migration/common

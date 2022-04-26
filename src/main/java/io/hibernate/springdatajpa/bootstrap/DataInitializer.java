@@ -1,10 +1,13 @@
 package io.hibernate.springdatajpa.bootstrap;
 
+import io.hibernate.springdatajpa.entity.AuthorUuid;
 import io.hibernate.springdatajpa.entity.Book;
 import static io.hibernate.springdatajpa.entity.Book.BookBuilder;
 
+import io.hibernate.springdatajpa.repository.AuthorUuidRepository;
 import io.hibernate.springdatajpa.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -13,10 +16,14 @@ import org.springframework.stereotype.Component;
 @Profile({"local", "default", "dev"})
 @Component
 public class DataInitializer implements CommandLineRunner {
-    private final BookRepository bookRepository;
+    private static final Logger LOG = LoggerFactory.getLogger(DataInitializer.class);
     
-    public DataInitializer(BookRepository bookRepository) {
+    private final BookRepository bookRepository;
+    private final AuthorUuidRepository authorUuidRepository;
+    
+    public DataInitializer(BookRepository bookRepository, AuthorUuidRepository authorUuidRepository) {
         this.bookRepository = bookRepository;
+        this.authorUuidRepository = authorUuidRepository;
     }
     
     @Override
@@ -61,6 +68,12 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println(">>>>>>");
             System.out.println(x);
         });
+    
+        AuthorUuid authorUuid = new AuthorUuid();
+        authorUuid.setFirstName("Johnson");
+        authorUuid.setLastName("Thompson");
+        AuthorUuid savedAuthorUuid = authorUuidRepository.save(authorUuid);
+        LOG.info("Saved Author UUID: {}", savedAuthorUuid.getId());
     
     }
 }
